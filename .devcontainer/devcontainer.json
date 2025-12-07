@@ -1,3 +1,7 @@
 {
-  
+  "name": "CUDA Dev Env",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": ["--gpus", "all"]
 }
