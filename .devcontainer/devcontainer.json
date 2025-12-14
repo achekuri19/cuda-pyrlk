@@ -3,8 +3,13 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "runArgs": ["--gpus", "all"],
+  "runArgs": [
+    "--gpus",
+    "all"
+  ],
   "mounts": [
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
-  ]
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/ubuntu/.ssh,type=bind,consistency=cached"
+  ],
+  "remoteUser": "ubuntu", // Start as root to run the update script, but...
+  "updateRemoteUserUID": true // ...Then switch to the user with the matching UID
 }
