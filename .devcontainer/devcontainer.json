@@ -3,5 +3,8 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "runArgs": ["--gpus", "all"]
+  "runArgs": ["--gpus", "all"],
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+  ]
 }
