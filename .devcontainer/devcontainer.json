@@ -11,5 +11,17 @@
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/ubuntu/.ssh,type=bind,consistency=cached"
   ],
   "remoteUser": "ubuntu", // Start as root to run the update script, but...
-  "updateRemoteUserUID": true // ...Then switch to the user with the matching UID
+  "updateRemoteUserUID": true, // ...Then switch to the user with the matching UID
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools-extension-pack",
+        "cschlosser.doxdocgen"
+      ]
+    }
+  }
 }
