@@ -18,5 +18,4 @@ if(WITH_CUDA)
     enable_language(CUDA)
 endif()
 
-add_executable(hello hello_main.cpp)
-target_link_options(hello PRIVATE -static)
+add_subdirectory(src)
