@@ -4,15 +4,18 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 usage()
 {
-    echo "usage: ./build.sh --arch [x86_64|aarch64]"
+    echo "usage: ./build.sh --arch [x86_64|aarch64] [--with-cuda]"
 }
 
 TARGET_ARCH=""
+WITH_CUDA="OFF"
 
 while [ "$1" != "" ]; do
     case $1 in
         --arch )                shift
                                 TARGET_ARCH=$1
+                                ;;
+        --with-cuda )           WITH_CUDA="ON"
                                 ;;
         -h | --help )           usage
                                 exit
@@ -44,10 +47,10 @@ fi
 
 # Start main build commands
 mkdir -p "$BUILD_DIR"
-cmake -S "$SCRIPT_DIR" -B "$BUILD_DIR" -DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN_FILE" -DCMAKE_BUILD_TYPE="$BUILD_TYPE"
+cmake -S "$SCRIPT_DIR" -B "$BUILD_DIR" -DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN_FILE" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" -DWITH_CUDA="$WITH_CUDA"
 cmake --build "$BUILD_DIR"
 
-echo "Build completed at: $BUILD_DIR for $TARGET_ARCH"
+echo "Build completed at: $BUILD_DIR for $TARGET_ARCH with CUDA $WITH_CUDA"
 
 
 
