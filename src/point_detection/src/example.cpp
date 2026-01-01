@@ -1,4 +1,4 @@
-#include <example.hpp>
+#include <point_detection/example.hpp>
 
 void add_arr(int n, float *x, float *y)
 {

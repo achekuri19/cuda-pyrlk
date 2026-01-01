@@ -1,15 +1,32 @@
 #include <iostream>
-#include <example.hpp>
+#include <point_detection/example.hpp>
+
+void cleanup(float* x, float* y) {
+    delete[] x;
+    delete[] y;
+}
 
 int main()
 {
-  float x[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-  float y[10] = {10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
-  int n = 10;
+  constexpr int N = 1 << 20;
 
-  add_arr(n, x, y);
-  for (int i = 0; i < n; i++) {
-    std::cout << "y[" << i << "] = " << y[i] << std::endl;
+  float* x = new float[N];
+  float* y = new float[N];
+
+  for (int i = 0; i < N; i++) {
+    x[i] = static_cast<float>(i);
+    y[i] = static_cast<float>(2 * i);
   }
+
+  add_arr(N, x, y);
+  for (int i = 0; i < N; i++) {
+    if (y[i] != static_cast<float>(3 * i)) {
+      std::cerr << "Error at index " << i << ": expected " << (x[i] + 2 * i)
+                << ", got " << y[i] << std::endl;
+      cleanup(x, y);
+      return -1;
+    }
+  }
+  cleanup(x, y);
   return 0;
 }
