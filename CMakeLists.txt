@@ -15,7 +15,12 @@ if(WITH_CUDA)
     else()
         message(STATUS "Building for CUDA Architectures: ${CMAKE_CUDA_ARCHITECTURES}")
     endif()
+
+    # Use system's CUDA runtime library
+    set(CMAKE_CUDA_RUNTIME_LIBRARY Shared)
     enable_language(CUDA)
+    
+    find_package(CUDAToolkit REQUIRED)
 endif()
 
 add_subdirectory(src)

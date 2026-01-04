@@ -14,18 +14,8 @@ void add_arr(int n, float* x, float* y) {
 
   float  *d_x, *d_y;
 
-  // Allocate memory on the GPU
-  printf("Allocating CUDA memory for %d floats\n", n);
-  cudaError_t err = cudaMalloc(&d_x, n * sizeof(float));
-  if (err != cudaSuccess) {
-    printf("CUDA malloc failed for d_x: %s\n", cudaGetErrorString(err));
-    return;
-  }
-  else
-  {
-    printf("CUDA malloc succeeded for d_x\n");
-  }
-
+  // Allocate GPU memory
+  cudaMalloc(&d_x, n * sizeof(float));
   cudaMalloc(&d_y, n * sizeof(float));
 
   // Copy arrays x and y to the GPU
