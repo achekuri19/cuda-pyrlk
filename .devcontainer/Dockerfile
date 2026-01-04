@@ -11,4 +11,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # (install aarch64 tools on x86_64 hosts, install x86_64 tools on aarch64 hosts)
     gcc-13-aarch64-linux-gnu \
     g++-13-aarch64-linux-gnu \
+    # TODO: Validate if CUDA for aarch64 is installed on base image, and if not, install it
     qemu-user-static
